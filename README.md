@@ -26,13 +26,13 @@ module-exception-monitoring
     │               └── MonitoringServiceImpl.java
     └── resources
         ├── config
-        │         └── mybatis-config.xml
+        │   └── mybatis-config.xml
         ├── resources-dev
-        │         └── application.properties
+        │   └── application.properties
         ├── resources-local
-        │         └── application.properties
+        │   └── application.properties
         ├── resources-prod
-        │         └── application.properties
+        │   └── application.properties
         └── sql
             └── monitoring_SQL.xml
 ```
