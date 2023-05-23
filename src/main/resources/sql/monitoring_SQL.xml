@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ejyang.module_exception_monitoring.mapper.MonitoringMapper">
+
+    <select id="fetchAllExceptionHistory">
+        SELECT * FROM temp.exception_monitoring
+    </select>
+
+    <insert id="insertExceptionHistory">
+        INSERT INTO temp.exception_monitoring (
+            app_name,
+            level,
+            type,
+            detail,
+            alarm_yn,
+            reg_date
+        )
+        VALUES (
+            #{dto.appName},
+            #{dto.level},
+            #{dto.type},
+            #{dto.detail},
+            #{dto.alarmYn},
+            NOW()
+        )
+    </insert>
+
+    <update id="updateExceptionHistory">
+        UPDATE temp.exception_monitoring
+        SET
+            app_name        = #{dto.appName},
+            level           = #{dto.level},
+            type            = #{dto.type},
+            detail          = #{dto.detail},
+            alarm_yn        = #{dto.alarmYn},
+            alarm_date      = #{dto.alarmDate}
+        WHERE idx = #{dto.idx}
+    </update>
+
+</mapper>
