@@ -2,10 +2,14 @@ package kr.co.ejyang.module_exception_monitoring.service;
 
 import kr.co.ejyang.module_exception_monitoring.dto.MonitoringDto;
 import kr.co.ejyang.module_exception_monitoring.mapper.MonitoringMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
+@Service
 public class MonitoringServiceImpl implements MonitoringService {
 
     private final MonitoringMapper monitoringMapper;
