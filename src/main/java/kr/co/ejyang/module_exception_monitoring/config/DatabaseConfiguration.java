@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 @Slf4j
 @Configuration
-@PropertySource("classpath:/resources-${spring.profiles.active}/application.properties")
+@PropertySource("classpath:application-monitoring-${spring.profiles.active}.properties")
 @EnableTransactionManagement
 public class DatabaseConfiguration {
 
