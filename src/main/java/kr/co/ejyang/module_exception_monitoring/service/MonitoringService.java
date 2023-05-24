@@ -14,7 +14,14 @@ public interface MonitoringService {
     /*******************************************************************************************
      * 에러 등록
      *******************************************************************************************/
-    void insertExceptionHistory(String appName, String level, String type, String detail);
+    void insertExceptionHistory(
+            String appName,
+            String level,
+            String status,
+            String type,
+            String detail,
+            String message
+    );
 
     /*******************************************************************************************
      * 에러 갱신 - 알람 발송
