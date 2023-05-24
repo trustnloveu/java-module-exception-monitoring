@@ -13,10 +13,7 @@ module-exception-monitoring
 └── src
     ├── main.java
     │   └── kr.co.ejyang
-    │       ├── MainApplication.java
     │       └── module_exception_monitoring
-    │           ├── config
-    │           │         └── DatabaseConfiguration.java
     │           ├── dto
     │           │         └── MonitoringDto.java
     │           ├── mapper
@@ -25,14 +22,6 @@ module-exception-monitoring
     │               ├── MonitoringService.java
     │               └── MonitoringServiceImpl.java
     └── resources
-        ├── config
-        │   └── mybatis-config.xml
-        ├── resources-dev
-        │   └── application.properties
-        ├── resources-local
-        │   └── application.properties
-        ├── resources-prod
-        │   └── application.properties
         └── sql
             └── monitoring_SQL.xml
 ```
@@ -41,7 +30,7 @@ module-exception-monitoring
 ## 호출 서비스
 + fetchAllExceptionHistory : 전체 에러 히스토리 조회 
 + insertExceptionHistory : 에러 등록
-+ updateExceptionHistory : 에러 갱신 (알람 발송 시)
++ updateExceptionHistory : 에러 갱신 (알람 발송 시, 발송 일자/유무 변경 )
 
 ## 테이블 DDL
 ```sql
