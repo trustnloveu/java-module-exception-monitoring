@@ -16,8 +16,10 @@ public class MonitoringDto {
         public long idx;
         public String appName;
         public String level;
+        public String status;
         public String type;
         public String detail;
+        public String message;
         public String alarmYn;
         public Date regDate;
         public Date alarmDate;
@@ -34,10 +36,16 @@ public class MonitoringDto {
         public String level;
 
         @NotBlank
+        public String status;
+
+        @NotBlank
         public String type;
 
         @NotBlank
         public String detail;
+
+        @NotBlank
+        public String message;
 
         @NotBlank
         @Pattern(regexp = "^[YN]$")

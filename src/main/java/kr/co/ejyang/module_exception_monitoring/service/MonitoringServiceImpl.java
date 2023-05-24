@@ -35,12 +35,14 @@ public class MonitoringServiceImpl implements MonitoringService {
      * 에러 등록
      *******************************************************************************************/
     @Override
-    public void insertExceptionHistory(String appName, String level, String type, String detail) {
+    public void insertExceptionHistory(String appName, String status, String level, String type, String detail, String message) {
         MonitoringDto.Insert dto = MonitoringDto.Insert.builder()
                 .appName(appName)
                 .level(level)
+                .status(status)
                 .type(type)
                 .detail(detail)
+                .message(message)
                 .build();
 
         monitoringMapper.insertExceptionHistory(dto);
