@@ -14,6 +14,8 @@ module-exception-monitoring
     ├── main.java
     │   └── kr.co.ejyang
     │       └── module_exception_monitoring
+    │           ├── config
+    │           │   └── CommonConsts.java    
     │           ├── dto
     │           │   └── MonitoringDto.java
     │           ├── mapper
@@ -28,9 +30,13 @@ module-exception-monitoring
 
 
 ## 호출 서비스
-+ fetchAllExceptionHistory : 전체 에러 히스토리 조회 
++ fetchAllExceptionHistory : 전체 조회 
++ fetchExceptionHistoryBySearch : 검색 리스트 
++ fetchAllExceptionHistoryAlarmNotSent : 알람 미발송 리스트 
 + insertExceptionHistory : 에러 등록
-+ updateExceptionHistory : 에러 갱신 (알람 발송 시, 발송 일자/유무 변경 )
++ updateExceptionHistoryByAlarmSent : 에러 갱신 (알람 발송 시, 발송 일자/유무 변경 )
++ createIndex : INDEX 생성 ( alarm_yn, app_name, level )
++ dropIndex : INDEX 삭제 ( alarm_yn, app_name, level )
 
 
 ## 멀티모듈 사용시 참고사항

@@ -4,37 +4,110 @@
 
 <mapper namespace="kr.co.ejyang.module_exception_monitoring.mapper.MonitoringMapper">
 
+    <!-- 에러 히스토리 조회 - 전체 -->
     <select id="fetchAllExceptionHistory">
-        SELECT * FROM temp.exception_monitoring
+        SELECT * FROM exception_monitoring
+        ORDER BY reg_date DESC
     </select>
 
+    <!-- 에러 히스토리 조회 - 검색 -->
+    <select id="fetchExceptionHistoryBySearch">
+        SELECT * FROM exception_monitoring
+        WHERE 1= 1
+            <if test="dto.idx != null">
+                , idx = #{dto.idx}
+            </if>
+            <if test="dto.appName != null">
+                , appName LIKE '%#{dto.appName}%'
+            </if>
+            <if test="dto.level != null">
+                , level = #{dto.level}
+            </if>
+            <if test="dto.status != null">
+                , status = #{dto.status}
+            </if>
+            <if test="dto.type != null">
+                , type LIKE '%#{dto.type}%'
+            </if>
+            <if test="dto.detail != null">
+                , detail LIKE '%#{dto.detail}%'
+            </if>
+            <if test="dto.alarmYn != null">
+                , alarm_yn = #{dto.alarmYn}
+            </if>
+            <if test="dto.message != null">
+                , message LIKE '%#{dto.message}%'
+            </if>
+        ORDER BY reg_date DESC
+    </select>
+
+    <!-- 에러 히스토리 조회 - 알람 미발송 -->
+    <select id="fetchAllExceptionHistoryAlarmNotSent">
+        SELECT * FROM exception_monitoring
+        WHERE alarm_yn = 'N'
+        ORDER BY reg_date DESC
+    </select>
+
+
+    <!-- 에러 등록 -->
     <insert id="insertExceptionHistory">
-        INSERT INTO temp.exception_monitoring (
+        INSERT INTO exception_monitoring (
             app_name,
             level,
+            status,
             type,
             detail,
+            message,
             reg_date
         )
         VALUES (
             #{dto.appName},
             #{dto.level},
+            #{dto.status},
             #{dto.type},
             #{dto.detail},
+            #{dto.message},
             NOW()
         )
     </insert>
 
-    <update id="updateExceptionHistory">
-        UPDATE temp.exception_monitoring
+    <!-- 에러 갱신 - 알람 발송 유무 -->
+    <update id="updateExceptionHistoryByAlarmSent">
+        UPDATE exception_monitoring
         SET
-            app_name        = #{dto.appName},
-            level           = #{dto.level},
-            type            = #{dto.type},
-            detail          = #{dto.detail},
-            alarm_yn        = #{dto.alarmYn},
-            alarm_date      = #{dto.alarmDate}
-        WHERE idx = #{dto.idx}
+            alarm_yn        = 'Y',
+            alarm_date      = NOW()
+        WHERE idx = #{idx}
     </update>
+
+    <!-- INDEX 생성 - 알람 발송 유무 -->
+    <update id="createAlarmIndex">
+        CREATE INDEX alarm_index ON exception_monitoring ( alarm_yn )
+    </update>
+
+    <!-- INDEX 생성 - APP 이름 -->
+    <update id="createAppNameIndex">
+        CREATE INDEX app_name_index ON exception_monitoring ( app_name )
+    </update>
+    <!-- INDEX 생성 - 레벨 -->
+    <update id="createLevelIndex">
+        CREATE INDEX level_index ON exception_monitoring ( level )
+    </update>
+
+    <!-- INDEX 삭제 - 알람 발송 유무 -->
+    <update id="dropAlarmIndex">
+        ALTER TABLE exception_monitoring DROP INDEX alarm_index
+    </update>
+
+    <!-- INDEX 삭제 - APP 이름 -->
+    <update id="dropAppNameIndex">
+        ALTER TABLE exception_monitoring DROP INDEX app_name_index
+    </update>
+
+    <!-- INDEX 삭제 - 레벨 -->
+    <update id="dropLevelIndex">
+        ALTER TABLE exception_monitoring DROP INDEX level_index
+    </update>
+
 
 </mapper>

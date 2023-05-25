@@ -1,7 +1,6 @@
 package kr.co.ejyang.module_exception_monitoring.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 
@@ -11,8 +10,10 @@ public class MonitoringDto {
 
     // 조회
     @Data
+    @Builder
     @NoArgsConstructor
     public static class Select {
+        @Positive(message = "잘못된 idx 입니다.")
         public long idx;
         public String appName;
         public String level;
@@ -29,40 +30,23 @@ public class MonitoringDto {
     @Builder
     @AllArgsConstructor
     public static class Insert {
-        @NotBlank
+        @NotBlank(message = "APP 이름은 필수값입니다.")
         public String appName;
-
-        @NotBlank
+        @NotBlank(message = "에러 레벨은 필수값입니다.")
         public String level;
-
-        @NotBlank
         public String status;
-
-        @NotBlank
         public String type;
-
-        @NotBlank
         public String detail;
-
-        @NotBlank
         public String message;
-
-        @NotBlank
-        @Pattern(regexp = "^[YN]$")
-        public String alarmYn;
     }
 
     // 갱신
     @Builder
     @AllArgsConstructor
     public static class Update {
-        @NotBlank
-        @Positive
+        @NotBlank(message = "잘못된 idx 입니다.")
+        @Positive(message = "잘못된 idx 입니다.")
         public long idx;
-
-        @NotBlank
-        @Pattern(regexp = "^[YN]$")
-        public String alarmYn;
     }
 
 }

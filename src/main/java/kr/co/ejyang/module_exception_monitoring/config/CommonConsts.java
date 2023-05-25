@@ -9,4 +9,7 @@ public interface CommonConsts {
     public static final String ERROR    = "ERROR";
     public static final String FATAL    = "FATAL";
 
+    // Exception 레벨 상수 그룹
+    public static final String[] LEVEL_LIST    = { DEBUG, INFO, WARN, ERROR, FATAL };
+
 }
