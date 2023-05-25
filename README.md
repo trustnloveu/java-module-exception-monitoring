@@ -52,14 +52,16 @@ project(':module_exception_monitoring') {
 ## 테이블 DDL
 ```sql
 CREATE TABLE `exception_monitoring` (
-    `idx` bigint AUTO_INCREMENT,
-    `app_name` varchar(20) NOT NULL,
-    `level` varchar(10) NOT NULL,
-    `type` varchar(50) NOT NULL,
-    `detail` varchar(1000) NOT NULL,
-    `alarm_yn` char(1) NOT NULL DEFAULT 'Y',
-    `reg_date` datetime NOT NULL,
-    `alarm_date` datetime DEFAULT NULL,
-    PRIMARY KEY (`idx`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `idx` bigint(20) NOT NULL AUTO_INCREMENT,
+  `app_name` varchar(20) NOT NULL,
+  `level` varchar(10) NOT NULL,
+  `status` varchar(3) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `detail` varchar(100) DEFAULT NULL,
+  `message` varchar(1000) DEFAULT NULL,
+  `alarm_yn` char(1) DEFAULT NULL DEFAULT 'Y',
+  `reg_date` datetime DEFAULT NULL,
+  `alarm_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`idx`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 ```
