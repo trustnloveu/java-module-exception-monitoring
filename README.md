@@ -65,7 +65,7 @@ CREATE TABLE `exception_monitoring` (
   `type` varchar(50) DEFAULT NULL,
   `detail` varchar(100) DEFAULT NULL,
   `message` varchar(1000) DEFAULT NULL,
-  `alarm_yn` char(1) DEFAULT NULL DEFAULT 'Y',
+  `alarm_yn` char(1) DEFAULT NULL DEFAULT 'N',
   `reg_date` datetime DEFAULT NULL,
   `alarm_date` datetime DEFAULT NULL,
   PRIMARY KEY (`idx`) USING BTREE

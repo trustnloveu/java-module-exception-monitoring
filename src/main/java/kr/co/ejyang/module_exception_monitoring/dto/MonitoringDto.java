@@ -9,7 +9,6 @@ import java.util.Date;
 public class MonitoringDto {
 
     // 조회
-    @Data
     @Builder
     @NoArgsConstructor
     public static class Select {
