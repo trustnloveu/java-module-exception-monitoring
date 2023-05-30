@@ -11,6 +11,7 @@ public class MonitoringDto {
     // 조회
     @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class Select {
         @Positive(message = "잘못된 idx 입니다.")
         public long idx;
