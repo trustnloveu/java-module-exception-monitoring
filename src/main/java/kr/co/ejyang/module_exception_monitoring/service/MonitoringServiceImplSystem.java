@@ -15,7 +15,7 @@ import static kr.co.ejyang.module_exception_monitoring.config.CommonConsts.SYSTE
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class MonitoringServiceImplSytem implements MonitoringService {
+public class MonitoringServiceImplSystem implements MonitoringService {
 
     private final MonitoringMapper monitoringMapper;
 
