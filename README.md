@@ -68,12 +68,12 @@ CREATE TABLE `debug_monitoring` (
   `status` varchar(3) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `detail` varchar(100) DEFAULT NULL,
-  `message` varchar(1000) DEFAULT NULL,
+  `message` text DEFAULT NULL,
   `alarm_yn` char(1) DEFAULT NULL DEFAULT 'N',
   `reg_date` datetime DEFAULT NULL,
   `alarm_date` datetime DEFAULT NULL,
   PRIMARY KEY (`idx`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ```
 
 ### 예외 코드 모니터링
@@ -85,12 +85,12 @@ CREATE TABLE `exception_monitoring` (
   `status` varchar(3) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `detail` varchar(100) DEFAULT NULL,
-  `message` varchar(1000) DEFAULT NULL,
+  `message` text DEFAULT NULL,
   `alarm_yn` char(1) DEFAULT NULL DEFAULT 'N',
   `reg_date` datetime DEFAULT NULL,
   `alarm_date` datetime DEFAULT NULL,
   PRIMARY KEY (`idx`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ```
 
 ### 시스템 에러 모니터링
@@ -102,10 +102,10 @@ CREATE TABLE `system_monitoring` (
   `status` varchar(3) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `detail` varchar(100) DEFAULT NULL,
-  `message` varchar(1000) DEFAULT NULL,
+  `message` text DEFAULT NULL,
   `alarm_yn` char(1) DEFAULT NULL DEFAULT 'N',
   `reg_date` datetime DEFAULT NULL,
   `alarm_date` datetime DEFAULT NULL,
   PRIMARY KEY (`idx`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ```
