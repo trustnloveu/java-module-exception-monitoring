@@ -22,7 +22,9 @@ module-exception-monitoring
     │           │   └── MonitoringMapper.java
     │           └── service
     │               ├── MonitoringService.java
-    │               └── MonitoringServiceImpl.java
+    │               ├── MonitoringServiceImplDebug.java
+    │               ├── MonitoringServiceImplException.java
+    │               └── MonitoringServiceImplSystem.java
     └── resources
         └── sql
             └── monitoring_SQL.xml
@@ -40,6 +42,7 @@ module-exception-monitoring
 
 
 ## 멀티모듈 사용시 참고사항
+- 모니터링 유형에 따라 MonitoringService 구현체 개별 호출/사용 ( Debug, Exception, System )
 - 베이스가 되는 프로젝트 build.gradle에 아래 설정 추가 ( SQL Resources 등록 )
 
 ```gradle
@@ -54,10 +57,45 @@ project(':module_exception_monitoring') {
 }
 ```
 
-
 ## 테이블 DDL
+
+### 디버그 모니터링
+```sql
+CREATE TABLE `debug_monitoring` (
+  `idx` bigint(20) NOT NULL AUTO_INCREMENT,
+  `app_name` varchar(20) NOT NULL,
+  `level` varchar(10) NOT NULL,
+  `status` varchar(3) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `detail` varchar(100) DEFAULT NULL,
+  `message` varchar(1000) DEFAULT NULL,
+  `alarm_yn` char(1) DEFAULT NULL DEFAULT 'N',
+  `reg_date` datetime DEFAULT NULL,
+  `alarm_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`idx`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+```
+
+### 예외 코드 모니터링
 ```sql
 CREATE TABLE `exception_monitoring` (
+  `idx` bigint(20) NOT NULL AUTO_INCREMENT,
+  `app_name` varchar(20) NOT NULL,
+  `level` varchar(10) NOT NULL,
+  `status` varchar(3) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `detail` varchar(100) DEFAULT NULL,
+  `message` varchar(1000) DEFAULT NULL,
+  `alarm_yn` char(1) DEFAULT NULL DEFAULT 'N',
+  `reg_date` datetime DEFAULT NULL,
+  `alarm_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`idx`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+```
+
+### 시스템 에러 모니터링
+```sql
+CREATE TABLE `system_monitoring` (
   `idx` bigint(20) NOT NULL AUTO_INCREMENT,
   `app_name` varchar(20) NOT NULL,
   `level` varchar(10) NOT NULL,

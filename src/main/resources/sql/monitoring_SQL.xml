@@ -6,13 +6,13 @@
 
     <!-- 에러 히스토리 조회 - 전체 -->
     <select id="fetchAllExceptionHistory">
-        SELECT * FROM exception_monitoring
+        SELECT * FROM ${tableName}
         ORDER BY reg_date DESC
     </select>
 
     <!-- 에러 히스토리 조회 - 검색 -->
     <select id="fetchExceptionHistoryBySearch">
-        SELECT * FROM exception_monitoring
+        SELECT * FROM ${tableName}
         WHERE 1= 1
             <if test="dto.idx != null">
                 , idx = #{dto.idx}
@@ -43,7 +43,7 @@
 
     <!-- 에러 히스토리 조회 - 알람 미발송 -->
     <select id="fetchAllExceptionHistoryAlarmNotSent">
-        SELECT * FROM exception_monitoring
+        SELECT * FROM ${tableName}
         WHERE alarm_yn = 'N'
         ORDER BY reg_date DESC
     </select>
@@ -51,7 +51,7 @@
 
     <!-- 에러 등록 -->
     <insert id="insertExceptionHistory">
-        INSERT INTO exception_monitoring (
+        INSERT INTO ${tableName} (
             app_name,
             level,
             status,
@@ -73,7 +73,7 @@
 
     <!-- 에러 갱신 - 알람 발송 유무 -->
     <update id="updateExceptionHistoryByAlarmSent">
-        UPDATE exception_monitoring
+        UPDATE ${tableName}
         SET
             alarm_yn        = 'Y',
             alarm_date      = NOW()
@@ -82,31 +82,31 @@
 
     <!-- INDEX 생성 - 알람 발송 유무 -->
     <update id="createAlarmIndex">
-        CREATE INDEX alarm_index ON exception_monitoring ( alarm_yn )
+        CREATE INDEX alarm_index ON ${tableName} ( alarm_yn )
     </update>
 
     <!-- INDEX 생성 - APP 이름 -->
     <update id="createAppNameIndex">
-        CREATE INDEX app_name_index ON exception_monitoring ( app_name )
+        CREATE INDEX app_name_index ON ${tableName} ( app_name )
     </update>
     <!-- INDEX 생성 - 레벨 -->
     <update id="createLevelIndex">
-        CREATE INDEX level_index ON exception_monitoring ( level )
+        CREATE INDEX level_index ON ${tableName} ( level )
     </update>
 
     <!-- INDEX 삭제 - 알람 발송 유무 -->
     <update id="dropAlarmIndex">
-        ALTER TABLE exception_monitoring DROP INDEX alarm_index
+        ALTER TABLE ${tableName} DROP INDEX alarm_index
     </update>
 
     <!-- INDEX 삭제 - APP 이름 -->
     <update id="dropAppNameIndex">
-        ALTER TABLE exception_monitoring DROP INDEX app_name_index
+        ALTER TABLE ${tableName} DROP INDEX app_name_index
     </update>
 
     <!-- INDEX 삭제 - 레벨 -->
     <update id="dropLevelIndex">
-        ALTER TABLE exception_monitoring DROP INDEX level_index
+        ALTER TABLE ${tableName} DROP INDEX level_index
     </update>
 
 

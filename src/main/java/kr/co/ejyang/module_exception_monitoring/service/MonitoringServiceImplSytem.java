@@ -3,22 +3,21 @@ package kr.co.ejyang.module_exception_monitoring.service;
 import jakarta.validation.Valid;
 import kr.co.ejyang.module_exception_monitoring.dto.MonitoringDto;
 import kr.co.ejyang.module_exception_monitoring.mapper.MonitoringMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// DB 테이블명
+import static kr.co.ejyang.module_exception_monitoring.config.CommonConsts.SYSTEM_MONITORING;
+
 @Slf4j
+@RequiredArgsConstructor
 @Service
-public class MonitoringServiceImpl implements MonitoringService {
+public class MonitoringServiceImplSytem implements MonitoringService {
 
     private final MonitoringMapper monitoringMapper;
-
-    // 생성자
-    MonitoringServiceImpl(@Autowired MonitoringMapper monitoringMapper) {
-        this.monitoringMapper = monitoringMapper;
-    }
 
     // #########################################################################################
     //                                      [ PUBLIC ]
@@ -29,7 +28,7 @@ public class MonitoringServiceImpl implements MonitoringService {
      *******************************************************************************************/
     @Override
     public List<MonitoringDto.Select> fetchAllExceptionHistory() {
-        return monitoringMapper.fetchAllExceptionHistory();
+        return monitoringMapper.fetchAllExceptionHistory(SYSTEM_MONITORING);
     }
 
     /*******************************************************************************************
@@ -37,7 +36,7 @@ public class MonitoringServiceImpl implements MonitoringService {
      *******************************************************************************************/
     @Override
     public List<MonitoringDto.Select> fetchExceptionHistoryBySearch(@Valid MonitoringDto.Select dto) {
-        return monitoringMapper.fetchExceptionHistoryBySearch(dto);
+        return monitoringMapper.fetchExceptionHistoryBySearch(SYSTEM_MONITORING, dto);
     }
 
     /*******************************************************************************************
@@ -45,7 +44,7 @@ public class MonitoringServiceImpl implements MonitoringService {
      *******************************************************************************************/
     @Override
     public List<MonitoringDto.Select> fetchAllExceptionHistoryAlarmNotSent() {
-        return monitoringMapper.fetchAllExceptionHistoryAlarmNotSent();
+        return monitoringMapper.fetchAllExceptionHistoryAlarmNotSent(SYSTEM_MONITORING);
     }
 
     /*******************************************************************************************
@@ -53,7 +52,7 @@ public class MonitoringServiceImpl implements MonitoringService {
      *******************************************************************************************/
     @Override
     public void insertExceptionHistory(@Valid MonitoringDto.Insert dto) {
-        monitoringMapper.insertExceptionHistory(dto);
+        monitoringMapper.insertExceptionHistory(SYSTEM_MONITORING, dto);
     }
 
     /*******************************************************************************************
@@ -61,7 +60,7 @@ public class MonitoringServiceImpl implements MonitoringService {
      *******************************************************************************************/
     @Override
     public void updateExceptionHistoryByAlarmSent(long idx) {
-        monitoringMapper.updateExceptionHistoryByAlarmSent(idx);
+        monitoringMapper.updateExceptionHistoryByAlarmSent(SYSTEM_MONITORING, idx);
     }
 
     /*******************************************************************************************
@@ -69,9 +68,9 @@ public class MonitoringServiceImpl implements MonitoringService {
      *******************************************************************************************/
     @Override
     public void createIndex() {
-        monitoringMapper.createAlarmIndex();
-        monitoringMapper.createAppNameIndex();
-        monitoringMapper.createLevelIndex();
+        monitoringMapper.createAlarmIndex(SYSTEM_MONITORING);
+        monitoringMapper.createAppNameIndex(SYSTEM_MONITORING);
+        monitoringMapper.createLevelIndex(SYSTEM_MONITORING);
     }
 
     /*******************************************************************************************
@@ -79,9 +78,9 @@ public class MonitoringServiceImpl implements MonitoringService {
      *******************************************************************************************/
     @Override
     public void dropIndex() {
-        monitoringMapper.dropAlarmIndex();
-        monitoringMapper.dropAppNameIndex();
-        monitoringMapper.dropLevelIndex();
+        monitoringMapper.dropAlarmIndex(SYSTEM_MONITORING);
+        monitoringMapper.dropAppNameIndex(SYSTEM_MONITORING);
+        monitoringMapper.dropLevelIndex(SYSTEM_MONITORING);
     }
 
 

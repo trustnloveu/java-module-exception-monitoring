@@ -25,6 +25,7 @@ public class MonitoringDto {
         public String alarmYn;
         public Date regDate;
         public Date alarmDate;
+        public String tableName;
     }
 
     // 등록
@@ -39,6 +40,7 @@ public class MonitoringDto {
         public String type;
         public String detail;
         public String message;
+        public String tableName;
     }
 
     // 갱신
@@ -48,6 +50,7 @@ public class MonitoringDto {
         @NotBlank(message = "잘못된 idx 입니다.")
         @Positive(message = "잘못된 idx 입니다.")
         public long idx;
+        public String tableName;
     }
 
 }
